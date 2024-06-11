@@ -12,13 +12,9 @@ It has a script to monitor that the main program is running, and restarts it if 
         Interfacing Options >> 1-Wire >> enable yes,
         reboot
 
-### Hardware
+### Hardware Changes
 
-- Data pin to rpi gpio (BCM) #4 [physical pin 7]
-- Ground to rip ground [physical pin 9] using this because it is next to #4
-- Power pin to rpi gpio #17 [physical pin 11] using this because it is next to the ground pin
-- You can use any other pin, but #17 is what the code is written for, just change the code if using another pin.
-
+- Instead of default Raspberry Pi 3v3 or 5v pin, the default script VDD pin is GPIO#17 [physical pin 11] (you can change to another GPIO pin in the script)
 
 ## Installation
 
