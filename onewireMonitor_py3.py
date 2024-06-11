@@ -10,7 +10,7 @@
 # Monitor onewire temp directory and hard reset power to the DS18B20 if folder is not present.
 
 import signal
-import RPi.GPIO as GPIO
+import rpi.lgpio as GPIO
 import time
 import os
 import datetime
@@ -32,13 +32,13 @@ try:
   GPIO.setmode(GPIO.BCM) # Broadcom pin-numbering scheme
   GPIO.setup(17, GPIO.OUT)
   while True:
-    # uncomment the next line, to log when the next cycle is starthing
-    print("{} - Starting new cycle".format(datetime.datetime.now()))
+    # uncomment the next line, to log when the next cycle is starting
+    print("{} - Starting New Detect Cycle".format(datetime.datetime.now()))
 
     ##############################################################################################
     # change this according to the folder / DS18B20 serial to monitor ****************************
     if (os.path.isdir("/sys/bus/w1/devices/28-XXXXXXXXXXXX") == False):
-      print("{} - Reseting OneWire".format(datetime.datetime.now()))
+      print("{} - Resetting OneWire".format(datetime.datetime.now()))
       GPIO.output(17, GPIO.LOW)
       time.sleep(3)
       GPIO.output(17, GPIO.HIGH)
@@ -48,16 +48,16 @@ try:
     time.sleep(50)
 
 except KeyboardInterrupt:
-  print("Keyboard Inturrupt detected")
+  print("Keyboard Interrupt Detected")
 
 except SystemExit:
-  print("kill signal detected")
+  print("Kill Signal Detected")
 
 except:
-  print("Some other error detected")
+  print("Other Error Detected")
 
 finally:
   # eigher way, do this before exit
-  print("{} - cleanning up GPIO pins".format(datetime.datetime.now()))
+  print("{} - cleaning up GPIO pins".format(datetime.datetime.now()))
   GPIO.cleanup()
   
