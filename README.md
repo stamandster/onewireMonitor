@@ -11,7 +11,7 @@ The script [onewireMonitor](https://github.com/SkullKill/onewireMonitor) is desi
 ## Onewire (1-wire) Raspberry Pi Setup
 
 ### Software
-    rasppi-config
+    raspi-config
         Interfacing Options >> 1-Wire >> enable yes,
         reboot
 
