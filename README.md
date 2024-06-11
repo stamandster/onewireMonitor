@@ -4,9 +4,6 @@ It has a script to monitor that the main program is running, and restarts it if 
 
 **NOTE: It would be better to find the cause the issue (wiring/connector/capacitance) than to use this.**
 
-The script [onewireMonitor](https://github.com/SkullKill/onewireMonitor) is design specificly for the Raspberry Pi.
-
-
 
 ## Onewire (1-wire) Raspberry Pi Setup
 
