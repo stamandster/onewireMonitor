@@ -39,22 +39,22 @@ try:
     # change this according to the folder / DS18B20 serial to monitor ****************************
     if (os.path.isdir("/sys/bus/w1/devices/28-XXXXXXXXXXXX") == False):
       print("{} - Resetting OneWire".format(datetime.datetime.now()))
+      #Power Control Pin, can be connected to a relay that is NC
       GPIO.output(17, GPIO.LOW)
       time.sleep(3)
       GPIO.output(17, GPIO.HIGH)
-      #time.sleep(5)
 
-    # sleep for 50 sec
-    time.sleep(50)
+      # sleep
+      time.sleep(60)
 
 except KeyboardInterrupt:
-  print("Keyboard Interrupt Detected")
+  print("")
 
 except SystemExit:
-  print("Kill Signal Detected")
+  print("")
 
 except:
-  print("Other Error Detected")
+  print("")
 
 finally:
   # eigher way, do this before exit
