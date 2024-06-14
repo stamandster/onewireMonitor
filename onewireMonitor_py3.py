@@ -30,7 +30,7 @@ setup_OSsignal()
 
 try:
   GPIO.setmode(GPIO.BCM) # Broadcom pin-numbering scheme
-  GPIO.setup(17, GPIO.OUT)
+  GPIO.setup(25, GPIO.OUT)
   while True:
     # uncomment the next line, to log when the next cycle is starting
     print("{} - Starting New Detect Cycle".format(datetime.datetime.now()))
@@ -40,12 +40,13 @@ try:
     if (os.path.isdir("/sys/bus/w1/devices/28-XXXXXXXXXXXX") == False):
       print("{} - Resetting OneWire".format(datetime.datetime.now()))
       #Power Control Pin, can be connected to a relay that is NC
-      GPIO.output(17, GPIO.LOW)
-      time.sleep(3)
-      GPIO.output(17, GPIO.HIGH)
+      GPIO.output(25, GPIO.LOW)
+      time.sleep(5)
+      GPIO.output(25, GPIO.HIGH)
 
-      # sleep
-      time.sleep(60)
+    else:   
+        # sleep
+        time.sleep(60)
 
 except KeyboardInterrupt:
   print("")
@@ -57,7 +58,5 @@ except:
   print("")
 
 finally:
-  # eigher way, do this before exit
   print("{} - cleaning up GPIO pins".format(datetime.datetime.now()))
   GPIO.cleanup()
-  
