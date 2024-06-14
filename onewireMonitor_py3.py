@@ -10,7 +10,7 @@
 # Monitor onewire temp directory and hard reset power to the DS18B20 if folder is not present.
 
 import signal
-import rpi.lgpio as GPIO
+import RPi.GPIO as GPIO
 import time
 import os
 import datetime
