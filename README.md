@@ -8,29 +8,44 @@ It has a script to monitor that the main program is running, and restarts it if 
 ## Onewire (1-wire) Raspberry Pi Setup
 
 ### Software
+```
     raspi-config
         Interfacing Options >> 1-Wire >> enable yes,
         reboot
+```
 
 ### Hardware Changes
 
-- Instead of default Raspberry Pi 3v3 or 5v pin, the default script VDD pin is GPIO#17 [physical pin 11] (you can change to another GPIO pin in the script) - https://pinout.xyz/
+Instead of default Raspberry Pi 3v3 or 5v pin, the default script VDD pin is GPIO#17 [physical pin 11] (you can change to another GPIO pin in the script) - https://pinout.xyz/
 
 ## Installation
 
-- Download the files
--     git clone https://github.com/stamandster/onewireMonitor
-- Copy both onewireMonitor.sh and onewireMonitor_py3.py to /usr/local/sbin and set permission
--     cd onewireMonitor
--     cp onewireMonitor* /usr/local/sbin/
-- Set Permissions on Folder
--     chmod +x /usr/local/sbin/onewireMonitor*
-- Find out the folder / DS18B20 serial to monitor
-- Change "/sys/bus/w1/devices/28-XXXXXXXXXXXX" to the correct value in onewireMonitor_py3.py
--     ls /sys/bus/w1/devices/
--     nano /usr/local/sbin/onewireMonitor_py3.py
-- Configure /etc/crontab and add the following line at the end of the file
--     nano /etc/crontab
+Download the files
+```
+git clone https://github.com/stamandster/onewireMonitor
+```
+
+Copy both onewireMonitor.sh and onewireMonitor_py3.py to /usr/local/sbin and set permission
+```
+cd onewireMonitor
+sudo cp onewireMonitor* /usr/local/sbin/
+```
+
+Set Permissions on Folder
+```
+sudo chmod +x /usr/local/sbin/onewireMonitor*
+```
+
+Find out the folder / DS18B20 serial to monitor, and Change "/sys/bus/w1/devices/28-XXXXXXXXXXXX" to the correct value in onewireMonitor_py3.py
+```
+ls /sys/bus/w1/devices/
+sudo nano /usr/local/sbin/onewireMonitor_py3.py
+```
+
+Configure /etc/crontab and add the following line at the end of the file
+```
+sudo crontab -e
+```
 
 ```
 # monitor and start onewireMonitor is process is not running
