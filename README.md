@@ -20,7 +20,9 @@ Instead of default Raspberry Pi 3v3 or 5v pin, the default script VDD pin is GPI
 
 ## Installation
 
-Download the files
+Configure New LGPIO via - https://rpi-lgpio.readthedocs.io/en/release-0.4/install.html
+
+Download the script files
 ```
 git clone https://github.com/stamandster/onewireMonitor
 ```
