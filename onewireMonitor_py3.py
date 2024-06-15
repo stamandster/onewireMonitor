@@ -1,18 +1,18 @@
 #!/usr/bin/python3
 
-#########################################################################################
-#
-# oneWireMonitor
-#
-# Written by Christopher St.Amand for the Raspberry Pi - v1.1 06/15/2024
-# Initially written by Simon Kong for the Raspberry Pi - V1.0 03/09/2019 - https://github.com/SkullKill/onewireMonitor
-#
-# Monitor Onewire devices folder and hard reset power to the DS18B20 if folder(s) are not 
-# present.
-#########################################################################################
+print("---------------------------------------------------------------------------------------")
+print(" OnewireMonitor v1.1")
+print("")
+print(" Written by Christopher St.Amand for the Raspberry Pi - v1.1 06/15/2024")
+print(" https://github.com/SkullKill/onewireMonitor")
+print(" Initially written by Simon Kong for the Raspberry Pi - V1.0 03/09/2019")
+print(" https://github.com/SkullKill/onewireMonitor")
+print("")
+print(" Monitor Onewire devices folder(s) & hard reset DS18B20 power not present")
+print("---------------------------------------------------------------------------------------")
 
 import signal
-import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO
 import time
 import os
 import fnmatch
@@ -41,7 +41,7 @@ setup_OSsignal()
 
 
 # Search Function
-def search_folders(base_dir, pattern):
+def w1_devices(base_dir, pattern):
     matching_folders = []
     
     # Loop through all entries in the base directory
@@ -63,24 +63,27 @@ def search_folders(base_dir, pattern):
 
 
 try:
-  print("{} - Initializing ...".format(datetime.datetime.now()))
+  print("{} - ... Running".format(datetime.datetime.now()))
   GPIO.setmode(GPIO.BCM) # Broadcom pin-numbering scheme
   GPIO.setup(controlpin, GPIO.OUT)
- 
-  while True:
-    result = search_folders(w1_path, w1_pattern)
+
+  loop = 0
+
+  while loop == 0:
+    result = w1_devices(w1_path, w1_pattern)
 
     if result == False:
-        print("{} - OneWire Offline, resetting".format(datetime.datetime.now()))
+        print("{} - ERROR: OneWire Offline, resetting".format(datetime.datetime.now()))
         #Power Control Pin, can be connected to a relay that is NC
-        print("{} - GPIO LOW".format(datetime.datetime.now()))
+        print("{} - SETTING GPIO LOW".format(datetime.datetime.now()))
         GPIO.output(controlpin, GPIO.LOW)
         time.sleep(3)
-        print("{} - GPIO HIGH".format(datetime.datetime.now()))
+        print("{} - SETTING GPIO HIGH".format(datetime.datetime.now()))
         GPIO.output(controlpin, GPIO.HIGH)
+        print("...")
     else:
         # un/comment the next line, to log when the next cycle is starting
-        print("{} - ... Detect Cycle".format(datetime.datetime.now()))
+        # print("{} - ... Detect Cycle".format(datetime.datetime.now()))
         #sleep
         time.sleep(detectcycle)
 
@@ -101,5 +104,5 @@ finally:
   #print("{} - cleaning up GPIO pins".format(datetime.datetime.now()))
   # Comment the following command if you are ALSO using another script utilizing 
   # RPi.GPIO as it will cause the other scripts to stop functioning, ex. CraftbeerPi
-  GPIO.cleanup()
+  #GPIO.cleanup()
   print("{} - Exiting Onewire Monitor".format(datetime.datetime.now()))
