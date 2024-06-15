@@ -1,4 +1,4 @@
-# onewireMonitor for Raspberry Pi v1.1 06/11/2024 
+# onewireMonitor for Raspberry Pi v1.1 06/15/2024 
 This will **Monitor onewire temp directory and hard reset power to the DS18B20 if folder is not present.** 
 It has a script to monitor that the main program is running, and restarts it if for whatever reason it crashes.
 
