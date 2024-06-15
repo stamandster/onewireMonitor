@@ -8,5 +8,4 @@ if [ ${result} -eq "0" ]; then
 else
         echo "starting onewireMonitor"
         nohup /usr/bin/python3 /usr/local/sbin/onewireMonitor_py3.py > /dev/null 2>&1 &
-        #/usr/bin/python3 /usr/local/sbin/onewireMonitor_py3.py & > /dev/null 2>&1
 fi
