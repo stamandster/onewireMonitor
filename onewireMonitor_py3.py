@@ -40,7 +40,7 @@ print("\n\n{} - Starting OneWire monitor".format(datetime.datetime.now()))
 setup_OSsignal()
 
 
-# Create module for searching
+# Search Function
 def search_folders(base_dir, pattern):
     matching_folders = []
     
