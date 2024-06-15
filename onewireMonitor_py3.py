@@ -4,59 +4,103 @@
 #
 # oneWireMonitor
 #
-# Written by Simon Kong for the Raspberry Pi
-# V1.0 03/09/2019
+# Written by Christopher St.Amand for the Raspberry Pi
+
+# v1.1 06/15/2024
 #
-# Monitor onewire temp directory and hard reset power to the DS18B20 if folder is not present.
+# Monitor Onewire devices folder and hard reset power to the DS18B20 if folder(s) are not 
+# present.
+#########################################################################################
 
 import signal
-import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO
 import time
 import os
+import fnmatch
 import datetime
 
 
-# handle kill signal
+# Variables
+w1_path='/sys/bus/w1/devices'  # Path to Onewire devices folder, shouldn't need to be changed
+w1_pattern='28-*'              # Onewire folder(s) pattern, shouldn't need to be changed
+controlpin=25                  # *** WARNING: Do not use the same GPIO pin as another script****
+detectcycle=60                 # Adjust cycle time as you see fit
+
+
+# handle kill signal0
 def handle_exit(sig, frame):
   raise(SystemExit)
-# Handle kill signal
+
+# Handle kill signal1
 def setup_OSsignal():
   signal.signal(signal.SIGTERM, handle_exit)
 
 
-print("\n\n{} - starting OneWire monitor".format(datetime.datetime.now()))
+# Starting Onewire Monitor
+print("\n\n{} - Starting OneWire monitor".format(datetime.datetime.now()))
 setup_OSsignal()
 
 
+# Create module for searching
+def search_folders(base_dir, pattern):
+    matching_folders = []
+    
+    # Loop through all entries in the base directory
+    for entry in os.listdir(base_dir):
+        # Form the full path
+        full_path = os.path.join(base_dir, entry)
+        
+        # Check if the entry is a directory and matches the pattern
+        if os.path.isdir(full_path) and fnmatch.fnmatch(entry, pattern):
+            matching_folders.append(full_path)
+    
+    # Return True matching folders if found, otherwise return False
+    if matching_folders:
+	# un/comment next line to log to console found onewire sensors
+        #print(matching_folders)
+        return True
+    else:
+        return False
+
+
 try:
+  print("{} - Initializing ...".format(datetime.datetime.now()))
   GPIO.setmode(GPIO.BCM) # Broadcom pin-numbering scheme
-  GPIO.setup(25, GPIO.OUT)
+  GPIO.setup(controlpin, GPIO.OUT)
+ 
   while True:
-    # uncomment the next line, to log when the next cycle is starting
-    print("{} - Starting New Detect Cycle".format(datetime.datetime.now()))
+    result = search_folders(w1_path, w1_pattern)
 
-    ##############################################################################################
-    # change this according to the folder / DS18B20 serial to monitor ****************************
-    if (os.path.isdir("/sys/bus/w1/devices/28-XXXXXXXXXXXX") == False):
-      print("{} - Resetting OneWire".format(datetime.datetime.now()))
-      #Power Control Pin, can be connected to a relay that is NC
-      GPIO.output(25, GPIO.LOW)
-      time.sleep(5)
-      GPIO.output(25, GPIO.HIGH)
+    if result == False:
+        print("{} - OneWire Offline, resetting".format(datetime.datetime.now()))
+        #Power Control Pin, can be connected to a relay that is NC
+        print("{} - GPIO LOW".format(datetime.datetime.now()))
+        GPIO.output(controlpin, GPIO.LOW)
+        time.sleep(3)
+        print("{} - GPIO HIGH".format(datetime.datetime.now()))
+        GPIO.output(controlpin, GPIO.HIGH)
+    else:
+        # un/comment the next line, to log when the next cycle is starting
+        print("{} - ... Detect Cycle".format(datetime.datetime.now()))
+        #sleep
+        time.sleep(detectcycle)
 
-    else:   
-        # sleep
-        time.sleep(60)
 
 except KeyboardInterrupt:
   print("")
 
+
 except SystemExit:
   print("")
+
 
 except:
   print("")
 
+
 finally:
-  print("{} - cleaning up GPIO pins".format(datetime.datetime.now()))
+  #print("{} - cleaning up GPIO pins".format(datetime.datetime.now()))
+  # Comment the following command if you are ALSO using another script utilizing 
+  # RPi.GPIO as it will cause the other scripts to stop functioning, ex. CraftbeerPi
   GPIO.cleanup()
+  print("{} - Exiting Onewire Monitor".format(datetime.datetime.now()))
