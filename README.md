@@ -38,10 +38,11 @@ Set Permissions on Folder
 sudo chmod +x /usr/local/sbin/onewireMonitor*
 ```
 
-Adjust variables in script to match your needs, found in the beginning sections of the script
+Edit variables in script
 ```
 sudo nano /usr/local/sbin/onewireMonitor_py3.py
 ```
+Adjust the following as needed
 ```
 # Variables
 w1_path='/sys/bus/w1/devices'  # Path to Onewire devices folder, shouldn't need to be changed
