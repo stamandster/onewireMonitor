@@ -40,7 +40,6 @@ sudo chmod +x /usr/local/sbin/onewireMonitor*
 
 Adjust variables in script to match your needs, found in the beginning sections of the script
 ```
-ls /sys/bus/w1/devices/
 sudo nano /usr/local/sbin/onewireMonitor_py3.py
 ```
 
