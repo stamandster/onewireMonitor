@@ -4,9 +4,8 @@
 #
 # oneWireMonitor
 #
-# Written by Christopher St.Amand for the Raspberry Pi
-
-# v1.1 06/15/2024
+# Written by Christopher St.Amand for the Raspberry Pi - v1.1 06/15/2024
+# Initially written by Simon Kong for the Raspberry Pi - V1.0 03/09/2019 - https://github.com/SkullKill/onewireMonitor
 #
 # Monitor Onewire devices folder and hard reset power to the DS18B20 if folder(s) are not 
 # present.
