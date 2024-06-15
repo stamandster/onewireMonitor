@@ -42,6 +42,13 @@ Adjust variables in script to match your needs, found in the beginning sections 
 ```
 sudo nano /usr/local/sbin/onewireMonitor_py3.py
 ```
+```
+# Variables
+w1_path='/sys/bus/w1/devices'  # Path to Onewire devices folder, shouldn't need to be changed
+w1_pattern='28-*'              # Onewire folder(s) pattern, shouldn't need to be changed
+controlpin=25                  # *** WARNING: Do not use the same GPIO pin as another script****
+detectcycle=60                 # Adjust cycle time as you see fit
+```
 
 Configure /etc/crontab and add the following line at the end of the file
 ```
