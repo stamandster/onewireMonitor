@@ -38,7 +38,7 @@ Set Permissions on Folder
 sudo chmod +x /usr/local/sbin/onewireMonitor*
 ```
 
-Find out the folder / DS18B20 serial to monitor, and Change "/sys/bus/w1/devices/28-XXXXXXXXXXXX" to the correct value in onewireMonitor_py3.py
+Adjust variables in script to match your needs, found in the beginning sections of the script
 ```
 ls /sys/bus/w1/devices/
 sudo nano /usr/local/sbin/onewireMonitor_py3.py
@@ -54,6 +54,7 @@ sudo crontab -e
 */1 * * * * root /usr/local/sbin/onewireMonitor.sh > /dev/null 2>&1
 ```
 
+Alternatively, you can run the script directly from any folder after adjusting your variables
 
 ## Notes
 
