@@ -23,7 +23,7 @@ import datetime
 w1_path='/sys/bus/w1/devices'  # Path to Onewire devices folder, shouldn't need to be changed
 w1_pattern='28-*'              # Onewire folder(s) pattern, shouldn't need to be changed
 controlpin=25                  # *** WARNING: Do not use the same GPIO pin as another script****
-detectcycle=60                 # Adjust cycle time as you see fit
+detectcycle=60                 # Adjust Detect Cycle time
 
 
 # handle kill signal0
