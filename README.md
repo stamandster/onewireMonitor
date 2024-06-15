@@ -16,7 +16,7 @@ It has a script to monitor that the main program is running, and restarts it if 
 
 ### Hardware Changes
 
-Instead of default Raspberry Pi 3v3 or 5v pin, the default script VDD pin is GPIO#17 [physical pin 11] (you can change to another GPIO pin in the script) - https://pinout.xyz/
+Instead of using normal Raspberry Pi power pins of 3v3 or 5v, the default script VDD pin for the DS18B20 will be GPIO#25 [physical pin 22] (you can change to another GPIO pin in the script) - https://pinout.xyz/
 
 ## Installation
 
