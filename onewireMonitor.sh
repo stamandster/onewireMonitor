@@ -3,7 +3,6 @@
 ps auxw | grep onewireMonitor_py3.py | grep -v grep > /dev/null
 result=$?
 echo "exit code: ${result}"
-#if [ $? != 0 ]
 if [ ${result} -eq "0" ]; then
         echo "Process Running, doing nothing"
 else
