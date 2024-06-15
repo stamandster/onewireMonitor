@@ -12,7 +12,7 @@ print(" Monitor Onewire devices folder(s) & hard reset DS18B20 power not present
 print("---------------------------------------------------------------------------------------")
 
 import signal
-#import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 import time
 import os
 import fnmatch
