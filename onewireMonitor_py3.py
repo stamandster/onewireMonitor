@@ -80,7 +80,13 @@ try:
         time.sleep(3)
         print("{} - SETTING GPIO HIGH".format(datetime.datetime.now()))
         GPIO.output(controlpin, GPIO.HIGH)
+	time.sleep(3)
+	result2 = w1_devices(w1_path, w1_pattern)
+        if result2 == True:
+            print("{} - Onewire Resolved".format(datetime.datetime.now()))
+
         print("...")
+	
     else:
         # un/comment the next line, to log when the next cycle is starting
         # print("{} - ... Detect Cycle".format(datetime.datetime.now()))
