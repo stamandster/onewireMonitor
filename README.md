@@ -20,6 +20,8 @@ Instead of using normal Raspberry Pi power pins of 3v3 or 5v, the default script
 
 ## Installation
 
+** If you are using CraftbeerPi4 (latest) then you may have uninstalled RPi.GPIO. You must install RPi-LGPIO -- https://rpi-lgpio.readthedocs.io/en/release-0.4/install.html **
+
 Download the script files
 ```
 git clone https://github.com/stamandster/onewireMonitor
